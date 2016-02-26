@@ -9,22 +9,39 @@ var order = require('gulp-order');
 var jshint = require('gulp-jshint');
 var templateCache = require('gulp-angular-templatecache');
 
+var Server = require('karma').Server;
+
+
+var CONFIG = {
+  jsFiles: ['src/**/*.js', '!**/*.spec.js'],
+  distFiles: ['dist/**/*'],
+  templates: ['src/templates/**/*'],
+  allSrc: ['src/**/*']
+}
 
 
 gulp.task('clean', function() {
-  return del(['dist/**/*']);
+  return del(CONFIG.distFiles);
+});
+
+
+gulp.task('jshint', function() {
+  return gulp.src()
+    .pipe(jshint(CONFIG.jsFiles))
+    .pipe(jshint.reporter('jshint-stylish'))
+    .pipe(jshint.reporter('fail'));
 });
 
 
 // Builds unminified source code
 gulp.task('build-fast', ['clean'], function() {
   function buildTemplates() {
-    return gulp.src(['src/**/*.html', 'src/**/*.svg'])
+    return gulp.src(CONFIG.templates)
       .pipe(templateCache({module: 'autocomplete'}));
   }
 
   function buildScripts() {
-    return gulp.src('src/**/*.js');
+    return gulp.src(CONFIG.jsFiles);
   }
 
   return mergeStream(buildTemplates(), buildScripts())
@@ -37,10 +54,10 @@ gulp.task('build-fast', ['clean'], function() {
 });
 
 
-// Full build with minification and jshint checking
+// Full build with minification
 gulp.task('build', ['clean'], function() {
   function buildTemplates() {
-    return gulp.src(['src/templates/**/*'])
+    return gulp.src(CONFIG.templates)
       .pipe(htmlmin({
         removeComments: true,
         collapseWhitespace: true,
@@ -52,10 +69,7 @@ gulp.task('build', ['clean'], function() {
   }
 
   function buildScripts() {
-    return gulp.src('src/**/*.js')
-      .pipe(jshint())
-      .pipe(jshint.reporter('jshint-stylish'))
-      .pipe(jshint.reporter('fail'));
+    return gulp.src(CONFIG.jsFiles);
   }
 
   return mergeStream(buildTemplates(), buildScripts())
@@ -75,6 +89,18 @@ gulp.task('build', ['clean'], function() {
 });
 
 
-gulp.task('watch', ['build-fast'], function() {
-  return gulp.watch(['src/**/*'], ['build-fast']);
+// Runs unit tests
+gulp.task('karma', ['build'], function(done) {
+  new Server({
+    configFile: __dirname + '/karma.conf.js'
+  }, done).start();
 });
+
+
+gulp.task('watch', ['build-fast'], function() {
+  return gulp.watch(CONFIG.allSrc, ['build-fast']);
+});
+
+
+gulp.task('validate', ['jshint', 'karma']);
+gulp.task('default', ['watch']);
