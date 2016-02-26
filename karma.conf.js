@@ -19,7 +19,7 @@ module.exports = function(config) {
     files: DEPENDENCIES.concat(SRC),
 
     reporters: ['progress'],
-    browsers: ['Chrome'],
+    browsers: ['Chrome', 'Firefox'],
     singleRun: true,
 
     client: {
