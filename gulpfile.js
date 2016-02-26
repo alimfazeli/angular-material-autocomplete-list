@@ -40,7 +40,7 @@ gulp.task('build-fast', ['clean'], function() {
 // Full build with minification and jshint checking
 gulp.task('build', ['clean'], function() {
   function buildTemplates() {
-    return gulp.src(['src/**/*.html', 'src/**/*.svg'])
+    return gulp.src(['src/templates/**/*'])
       .pipe(htmlmin({
         removeComments: true,
         collapseWhitespace: true,
