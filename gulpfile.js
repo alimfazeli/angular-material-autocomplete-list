@@ -15,13 +15,29 @@ gulp.task('clean', function() {
   return del(['dist/**/*']);
 });
 
-// gulp.task('jshint', function() {
-//   return gulp.src('src/**/*.js')
-//     .pipe(jshint())
-//     .pipe(jshint.reporter('default'))
-//     .pipe(jshint.reporter('fail'));
-// });
 
+// Builds unminified source code
+gulp.task('build-fast', ['clean'], function() {
+  function buildTemplates() {
+    return gulp.src(['src/**/*.html', 'src/**/*.svg'])
+      .pipe(templateCache({module: 'autocomplete'}));
+  }
+
+  function buildScripts() {
+    return gulp.src('src/**/*.js');
+  }
+
+  return mergeStream(buildTemplates(), buildScripts())
+    .pipe(order([
+      '!template.js',
+      'template.js'
+    ]))
+    .pipe(concat('autocompleteList.js'))
+    .pipe(gulp.dest('dist'));
+});
+
+
+// Full build with minification and jshint checking
 gulp.task('build', ['clean'], function() {
   function buildTemplates() {
     return gulp.src(['src/**/*.html', 'src/**/*.svg'])
@@ -38,7 +54,7 @@ gulp.task('build', ['clean'], function() {
   function buildScripts() {
     return gulp.src('src/**/*.js')
       .pipe(jshint())
-      .pipe(jshint.reporter('default'))
+      .pipe(jshint.reporter('jshint-stylish'))
       .pipe(jshint.reporter('fail'));
   }
 
@@ -58,6 +74,7 @@ gulp.task('build', ['clean'], function() {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('watch', ['build'], function() {
-  return gulp.watch(['src/**/*', '!src/.jshintrc'], ['build']);
+
+gulp.task('watch', ['build-fast'], function() {
+  return gulp.watch(['src/**/*'], ['build-fast']);
 });
