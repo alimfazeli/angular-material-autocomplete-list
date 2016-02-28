@@ -93,7 +93,13 @@ gulp.task('build', ['clean'], function() {
 gulp.task('karma', ['build'], function(done) {
   new Server({
     configFile: __dirname + '/karma.conf.js'
-  }, done).start();
+  }, function(exitCode, errorCode) {
+    if (exitCode != 0) {
+      console.log("Karma exited with exit code: " + exitCode);
+    }
+
+    done();
+  }).start();
 });
 
 
