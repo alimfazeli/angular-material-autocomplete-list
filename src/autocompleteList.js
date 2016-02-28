@@ -2,29 +2,19 @@
   'use strict';
 
   /**
-   * A better multiSelect control that makes use of the material list element.
+   * @name Autocomplete list
    *
-   * Attributes:
-   *  - ngModel:
-   *     ngModel can either be an array of objects or a single object.
-   *     If it is an array, each object should be in the form:
-   *         {
-   *             text: 'Text to display on the control',
-   *             value: 'The default value of the item'
-   *         }
-   *     If it is an object, each key value pair becomes an option in the
-   *     list such that the key represents the text value and the paired
-   *     value is the default value of the item.
-   *     Eg:
-   *         {
-   *             'Text to display on the control': 'Default value of the item'
-   *             ....
-   *         }
-   * - options:
-   *     If options is present, a select control is added to each item instead
-   *     of a checkbox. options should be a plain object where each key becomes
-   *     the text content of the <option> element and the value becomes the
-   *     value attribute.
+   * @description A better multiselect control that makes use of the material list element.
+   *
+   * @param {Array.<Object>} ngModel - Required. Array of selected objects. These are tracked via reference.
+   * @param {Array.<Object>} items - Entire list of items to select from.
+   * @param {Expression} itemText - Expression to convert an item object into a single string to be displayed in the autocomplete and the list. The item is accessed via the `item` property.
+   * @example
+    <autocomplete-list
+      ng-model="ctrl.selectedPeople"
+      items="ctrl.allPeople"
+      item-text="item.firstName + ' ' + item.lastName">
+    </autocomplete-list>
    */
   angular.module('autocompleteList', ['ngMaterial']).directive('autocompleteList', autocompleteList);
 
@@ -168,3 +158,28 @@
     }
   }
 })();
+
+
+
+/* Attributes:
+*  - ngModel:
+*     ngModel can either be an array of objects or a single object.
+*     If it is an array, each object should be in the form:
+*         {
+*             text: 'Text to display on the control',
+*             value: 'The default value of the item'
+*         }
+*     If it is an object, each key value pair becomes an option in the
+*     list such that the key represents the text value and the paired
+*     value is the default value of the item.
+*     Eg:
+*         {
+*             'Text to display on the control': 'Default value of the item'
+*             ....
+*         }
+* - options:
+*     If options is present, a select control is added to each item instead
+*     of a checkbox. options should be a plain object where each key becomes
+*     the text content of the <option> element and the value becomes the
+*     value attribute.
+*/
