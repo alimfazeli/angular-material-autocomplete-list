@@ -8,6 +8,7 @@ var mergeStream = require('merge-stream');
 var order = require('gulp-order');
 var jshint = require('gulp-jshint');
 var templateCache = require('gulp-angular-templatecache');
+var jsdoc2md = require('gulp-jsdoc-to-markdown');
 
 var Server = require('karma').Server;
 
@@ -105,6 +106,14 @@ gulp.task('karma', ['build'], function(done) {
 
 gulp.task('watch', ['build-fast'], function() {
   return gulp.watch(CONFIG.allSrc, ['build-fast']);
+});
+
+
+gulp.task('docs', function() {
+  gulp.src(CONFIG.jsFiles)
+    .pipe(concat('README.md'))
+    .pipe(jsdoc2md())
+    .pipe(gulp.dest('./'));
 });
 
 
