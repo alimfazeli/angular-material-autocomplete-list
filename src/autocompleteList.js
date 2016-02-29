@@ -1,6 +1,8 @@
 (function() {
   'use strict';
 
+  angular.module('autocompleteList', ['ngMaterial']).directive('autocompleteList', autocompleteList);
+
   /**
    * @name Autocomplete list
    *
@@ -16,9 +18,6 @@
       item-text="item.firstName + ' ' + item.lastName">
     </autocomplete-list>
    */
-  angular.module('autocompleteList', ['ngMaterial']).directive('autocompleteList', autocompleteList);
-
-
   function autocompleteList() {
     return {
       restrict: 'EA',
