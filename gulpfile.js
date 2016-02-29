@@ -104,17 +104,23 @@ gulp.task('karma', ['build'], function(done) {
 });
 
 
-gulp.task('watch', ['build-fast'], function() {
-  return gulp.watch(CONFIG.allSrc, ['build-fast']);
-});
-
-
 gulp.task('docs', function() {
   gulp.src(CONFIG.jsFiles)
     .pipe(concat('DOCS.md'))
     .pipe(jsdoc2md())
     .pipe(gulp.dest('./'));
 });
+
+
+gulp.task('watch', ['build-fast'], function() {
+  return gulp.watch(CONFIG.allSrc, ['build-fast']);
+});
+
+
+gulp.task('watch-docs', function() {
+  return gulp.watch(CONFIG.jsFiles, ['docs']);
+});
+
 
 
 gulp.task('validate', ['jshint', 'karma']);
