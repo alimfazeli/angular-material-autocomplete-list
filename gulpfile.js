@@ -27,8 +27,8 @@ gulp.task('clean', function() {
 
 
 gulp.task('jshint', function() {
-  return gulp.src()
-    .pipe(jshint(CONFIG.jsFiles))
+  return gulp.src(CONFIG.jsFiles)
+    .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'))
     .pipe(jshint.reporter('fail'));
 });
