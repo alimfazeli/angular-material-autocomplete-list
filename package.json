@@ -4,8 +4,8 @@
   "description": "An angular material directive that functions like a multiselect element, but with additional functionality.",
   "main": "dist/autcompleteList.min.js",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/jamesfer/angular-material-autocomplete-list.git"
+    "type": "git",
+    "url": "https://github.com/jamesfer/angular-material-autocomplete-list.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -23,9 +23,12 @@
     "angular-mocks": "^1.5.0",
     "del": "^2.2.0",
     "gulp": "^3.9.1",
+    "gulp-angular-templatecache": "^1.8.0",
     "gulp-closure-compiler": "^0.4.0",
+    "gulp-concat": "^2.6.0",
     "gulp-htmlmin": "^1.3.0",
     "gulp-jsdoc-to-markdown": "^1.2.1",
+    "gulp-jshint": "^2.0.0",
     "gulp-order": "^1.1.1",
     "gulp-rename": "^1.2.2",
     "jasmine-core": "^2.4.1",
@@ -36,5 +39,11 @@
     "karma-firefox-launcher": "^0.1.7",
     "karma-jasmine": "^0.3.7",
     "merge-stream": "^1.0.0"
+  },
+  "dependencies": {
+    "angular": "^1.5.0",
+    "angular-animate": "^1.5.0",
+    "angular-aria": "^1.5.0",
+    "angular-material": "^1.0.5"
   }
 }
