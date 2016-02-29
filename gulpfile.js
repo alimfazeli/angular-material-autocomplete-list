@@ -111,7 +111,7 @@ gulp.task('watch', ['build-fast'], function() {
 
 gulp.task('docs', function() {
   gulp.src(CONFIG.jsFiles)
-    .pipe(concat('README.md'))
+    .pipe(concat('DOCS.md'))
     .pipe(jsdoc2md())
     .pipe(gulp.dest('./'));
 });
