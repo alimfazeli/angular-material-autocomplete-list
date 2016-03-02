@@ -1,6 +1,6 @@
 {
   "name": "angular-material-autocomplete-list",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "An angular material directive that functions like a multiselect element, but with additional functionality.",
   "main": "dist/autcompleteList.min.js",
   "repository": {
