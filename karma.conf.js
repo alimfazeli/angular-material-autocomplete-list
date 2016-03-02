@@ -1,4 +1,8 @@
 module.exports = function(config) {
+  var COMPILED_SRC = [
+    'dist/autocompleteList.js',
+    'src/**/*.spec.js'
+  ];
 
   var SRC = [
     'dist/autocompleteList.js',
@@ -13,17 +17,25 @@ module.exports = function(config) {
     'node_modules/angular-material/angular-material.js',
   ];
 
-  config.set({
+  var files = DEPENDENCIES.concat((process.env.KARMA_TEST_COMPRESSED) ? COMPILED_SRC : SRC);
+
+  var options = {
     basePath: './',
     frameworks: ['jasmine'],
-    files: DEPENDENCIES.concat(SRC),
+    files: files,
 
     reporters: ['progress'],
-    browsers: ['Chrome', 'Firefox'],
+    browsers: ['Firefox', 'PhantomJS'],
     singleRun: true,
+    autoWatch: false,
+
+    // Only launch one browser at a time since doing multiple can cause disconnects/issues
+    concurrency: 1,
 
     client: {
       clearContext: false
     }
-  });
+  }
+
+  config.set(options);
 }

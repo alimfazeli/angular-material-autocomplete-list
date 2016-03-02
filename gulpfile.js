@@ -3,10 +3,10 @@ var concat = require('gulp-concat');
 var del = require('del');
 var htmlmin = require('gulp-htmlmin');
 var rename = require('gulp-rename');
-var closureCompiler = require('gulp-closure-compiler');
 var mergeStream = require('merge-stream');
 var order = require('gulp-order');
 var jshint = require('gulp-jshint');
+var uglify = require('gulp-uglify');
 var templateCache = require('gulp-angular-templatecache');
 var jsdoc2md = require('gulp-jsdoc-to-markdown');
 
@@ -80,27 +80,42 @@ gulp.task('build', ['clean'], function() {
     ]))
     .pipe(concat('autocompleteList.js'))
     .pipe(gulp.dest('dist'))
-    .pipe(closureCompiler({
-      compilerPath: 'node_modules/google-closure-compiler/compiler.jar',
-      fileName: 'autocompleteList.min.js',
-      language: 'ECMASCRIPT5_STRICT',
-      compilation_level: 'ADVANCED_OPTIMIZATIONS'
-    }))
+    .pipe(uglify())
+    .pipe(rename('autocompleteList.min.js'))
     .pipe(gulp.dest('dist'));
 });
 
 
 // Runs unit tests
 gulp.task('karma', ['build'], function(done) {
-  new Server({
+  var karmaConfig = {
     configFile: __dirname + '/karma.conf.js'
-  }, function(exitCode, errorCode) {
-    if (exitCode != 0) {
-      console.log("Karma exited with exit code: " + exitCode);
-    }
+  };
 
-    done();
-  }).start();
+  testSource();
+
+  function testSource() {
+    var karma = new Server(karmaConfig, captureError(testCompiled));
+    karma.start();
+  }
+
+  function testCompiled() {
+    process.env.KARMA_TEST_COMPRESSED = true;
+
+    var karma = new Server(karmaConfig, done);
+    karma.start();
+  }
+
+  function captureError(next) {
+    return function(exitCode, errorCode) {
+      if (exitCode != 0) {
+        console.log("Karma exited with exit code: " + exitCode);
+      }
+      else {
+        next();
+      }
+    }
+  }
 });
 
 
