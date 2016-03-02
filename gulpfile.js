@@ -81,13 +81,8 @@ gulp.task('build', ['clean'], function() {
     ]))
     .pipe(concat('autocompleteList.js'))
     .pipe(gulp.dest('dist'))
-    // .pipe(closureCompiler({
-    //   compilerPath: 'node_modules/google-closure-compiler/compiler.jar',
-    //   fileName: 'autocompleteList.min.js',
-    //   language: 'ECMASCRIPT5_STRICT',
-    //   compilation_level: 'ADVANCED_OPTIMIZATIONS'
-    // }))
     .pipe(uglify())
+    .pipe(rename('autocompleteList.min.js'))
     .pipe(gulp.dest('dist'));
 });
 
