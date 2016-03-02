@@ -3,7 +3,6 @@ var concat = require('gulp-concat');
 var del = require('del');
 var htmlmin = require('gulp-htmlmin');
 var rename = require('gulp-rename');
-var closureCompiler = require('gulp-closure-compiler');
 var mergeStream = require('merge-stream');
 var order = require('gulp-order');
 var jshint = require('gulp-jshint');
