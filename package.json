@@ -1,6 +1,6 @@
 {
   "name": "angular-material-autocomplete-list",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "An angular material directive that functions like a multiselect element, but with additional functionality.",
   "main": "dist/autcompleteList.min.js",
   "repository": {
@@ -39,11 +39,5 @@
     "karma-firefox-launcher": "^0.1.7",
     "karma-jasmine": "^0.3.7",
     "merge-stream": "^1.0.0"
-  },
-  "dependencies": {
-    "angular": "^1.5.0",
-    "angular-animate": "^1.5.0",
-    "angular-aria": "^1.5.0",
-    "angular-material": "^1.0.5"
   }
 }
