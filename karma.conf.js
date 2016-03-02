@@ -25,7 +25,7 @@ module.exports = function(config) {
     files: files,
 
     reporters: ['progress'],
-    browsers: ['Firefox', 'PhantomJS2'],
+    browsers: ['Firefox', 'PhantomJS'],
     singleRun: true,
     autoWatch: false,
 
