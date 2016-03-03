@@ -11,3 +11,5 @@ before_script:
   - sleep 3
 script:
   - gulp karma
+notifications:
+  email: false
