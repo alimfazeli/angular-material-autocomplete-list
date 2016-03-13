@@ -1,0 +1,26 @@
+{
+  "name": "angular-material-autocomplete-list-demo",
+  "version": "1.0.4",
+  "description": "Demo of the angular-material-autocomplete-list component",
+  "main": "demo/demo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamesfer/angular-material-autocomplete-list.git"
+  },
+  "author": "James Ferguson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jamesfer/angular-material-autocomplete-list/issues"
+  },
+  "homepage": "https://github.com/jamesfer/angular-material-autocomplete-list#readme",
+  "devDependencies": {
+    "angular": "^1.5.0",
+    "angular-animate": "^1.5.0",
+    "angular-aria": "^1.5.0",
+    "angular-material": "^1.0.6",
+    "angular-messages": "^1.5.0"
+  }
+}
