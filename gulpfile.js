@@ -17,8 +17,9 @@ var CONFIG = {
   jsFiles: ['src/**/*.js', '!**/*.spec.js'],
   distFiles: ['dist/**/*'],
   templates: ['src/templates/**/*'],
-  allSrc: ['src/**/*']
-}
+  allSrc: ['src/**/*'],
+  pagesSrc: ['demo/', 'node_modules/angular*/']
+};
 
 
 gulp.task('clean', function() {
