@@ -7,6 +7,7 @@ var mergeStream = require('merge-stream');
 var order = require('gulp-order');
 var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
+var git = require('gulp-git');
 var templateCache = require('gulp-angular-templatecache');
 var jsdoc2md = require('gulp-jsdoc-to-markdown');
 
@@ -18,7 +19,8 @@ var CONFIG = {
   distFiles: ['dist/**/*'],
   templates: ['src/templates/**/*'],
   allSrc: ['src/**/*'],
-  pagesSrc: ['demo/', 'node_modules/angular*/']
+  // Must be a string
+  pagesSrc: 'demo/'
 };
 
 
@@ -125,6 +127,28 @@ gulp.task('docs', function() {
     .pipe(concat('DOCS.md'))
     .pipe(jsdoc2md())
     .pipe(gulp.dest('./'));
+});
+
+
+// Commits the changes to the demo files to the gh-pages branch
+// Currently bugged
+gulp.task('update-demo', function(done) {
+  git.revParse({args: "--abbrev-ref HEAD", quiet: true}, function(err, hash) {
+    var originalBranch = hash;
+
+    git.checkout('gh-pages', function(err) {
+      if (err) console.log(err);
+
+      git.checkout(originalBranch, {args: '-- ' + CONFIG.pagesSrc}, function(err) {
+        gulp.src(CONFIG.pagesSrc)
+          .pipe(git.commit('Automatic update from ' + originalBranch + ''))
+          .pipe(function() {
+            git.checkout(originalBranch);
+            done();
+          });
+      });
+    });
+  });
 });
 
 
