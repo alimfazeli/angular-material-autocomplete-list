@@ -58,6 +58,10 @@
       }
     ];
 
-    this.selectedPeople = [this.allPeople[0]];
+    this.selectedPeople = [
+      [this.allPeople[0]],
+      [this.allPeople[2]],
+      [this.allPeople[4]],
+    ];
   }
 })();
