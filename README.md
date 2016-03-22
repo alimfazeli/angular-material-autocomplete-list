@@ -11,3 +11,9 @@ For more details head to the view the docs [here](DOCS.md)
 ## Installation
 
 To install via npm simply run `npm install --save angular-material-autocomplete-list`
+
+## Usage
+
+First include the source code in your html page. The file to include is `angular-material-autocomplete-list/dist/autocompeteList.min.js`.
+Then add the `autocompleteList` module as a dependent of any modules that may use the directive.
+For a full example, you can [preview the source of the demo](https://github.com/jamesfer/angular-material-autocomplete-list/tree/gh-pages/demo).
