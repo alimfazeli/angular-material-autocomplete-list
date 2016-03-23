@@ -1,4 +1,4 @@
-<md-autocomplete md-search-text="aclCtrl.searchText" md-selected-item-change="aclCtrl.selectedItemChange(item)" md-items="item in aclCtrl.matchingItems(aclCtrl.searchText)" md-item-text="aclCtrl.itemText(item)" placeholder="Search members" md-no-cache>
+<md-autocomplete md-search-text="aclCtrl.searchText" md-selected-item-change="aclCtrl.selectedItemChange(item)" md-items="item in aclCtrl.matchingItems(aclCtrl.searchText)" md-item-text="aclCtrl.itemText(item)" placeholder="{{ aclCtrl.placeholder }}" md-no-cache>
 	<md-item-template>
 		<span md-highlight-text="aclCtrl.searchText" md-highlight-flags="gi">{{ aclCtrl.itemText({item: item}) }}</span>
 	</md-item-template>

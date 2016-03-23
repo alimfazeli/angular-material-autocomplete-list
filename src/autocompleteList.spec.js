@@ -11,7 +11,8 @@ describe('AutocompleteDirective', function() {
       <autocomplete-list\
         ng-model="selectedPeople"\
         items="allPeople"\
-        item-text="item.firstName + \' \' + item.lastName">\
+        item-text="item.firstName + \' \' + item.lastName"\
+        placeholder="This is a placeholder string">\
         <h1 class="person">{{ aclCtrl.itemText({item: item}) }}</h1>\
       </autocomplete-list>';
 
@@ -54,26 +55,7 @@ describe('AutocompleteDirective', function() {
   });
 
 
-  describe('using the basic template', function() {
-    it('should render an autocomplete element', function() {
-      var element = buildElement(BASIC_TEMPLATE);
-      var autocomplete = element.find('md-autocomplete');
-      expect(autocomplete.length).toBe(1);
-    });
-
-    it('should render a list of selected people', function() {
-      scope.selectedPeople.push(scope.allPeople[0]);
-
-      var element = buildElement(BASIC_TEMPLATE);
-      var list = element.find('md-list')[0];
-      var listItems = list.querySelectorAll('md-list-item');
-      expect(listItems.length).toBe(1);
-
-      var firstItemP = listItems[0].querySelector('p');
-      expect(firstItemP).toBeTruthy();
-      expect(firstItemP.innerHTML).toBe('Alan A');
-    });
-
+  describe('basic functionality', function() {
     it('should add an item', function() {
       var element = buildElement(BASIC_TEMPLATE);
       var ctrl = element.controller('autocompleteList');
@@ -131,6 +113,34 @@ describe('AutocompleteDirective', function() {
   });
 
 
+  describe('using the basic template', function() {
+    it('should render an autocomplete element', function() {
+      var element = buildElement(BASIC_TEMPLATE);
+      var autocomplete = element.find('md-autocomplete');
+      expect(autocomplete.length).toBe(1);
+    });
+
+    it('should render a list of selected people', function() {
+      scope.selectedPeople.push(scope.allPeople[0]);
+
+      var element = buildElement(BASIC_TEMPLATE);
+      var list = element.find('md-list')[0];
+      var listItems = list.querySelectorAll('md-list-item');
+      expect(listItems.length).toBe(1);
+
+      var firstItemP = listItems[0].querySelector('p');
+      expect(firstItemP).toBeTruthy();
+      expect(firstItemP.innerHTML).toBe('Alan A');
+    });
+
+    it('should display the default placeholder string', function() {
+      var element = buildElement(BASIC_TEMPLATE);
+      var list = element.find('md-autocomplete');
+      expect(list.attr('placeholder')).toBe('Search...');
+    });
+  });
+
+
   describe('using a template with custom content', function() {
     it('should render the content in each list item', function() {
       scope.selectedPeople.push(scope.allPeople[0]);
@@ -139,6 +149,12 @@ describe('AutocompleteDirective', function() {
       var list = element.find('md-list')[0];
       var listItems = list.querySelectorAll('md-list-item');
       expect(listItems[0].querySelector('h1.person')).not.toBeNull();
+    });
+
+    it('should display the custom placeholder string', function() {
+      var element = buildElement(CUSTOM_TEMPLATE);
+      var list = element.find('md-autocomplete');
+      expect(list.attr('placeholder')).toBe('This is a placeholder string');
     });
   });
 
