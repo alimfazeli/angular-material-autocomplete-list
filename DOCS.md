@@ -35,13 +35,5 @@ The contents can be customized by providing contents to the directive which will
 | --- | --- | --- |
 | ngModel | <code>Array.&lt;Object&gt;</code> | Required. Array of selected objects. These are tracked via reference. |
 | items | <code>Array.&lt;Object&gt;</code> | Entire list of items to select from. |
-| itemText | <code>Expression</code> | Expression to convert an item object into a single string to be displayed in the autocomplete and the list. The text generated here will also be searched when the user types in the autocomplete box. The item is accessed via the `item` property. |
+| itemText | <code>Expression</code> | Expression to convert an item object into a single string to be displayed in the autocomplete and the list. The text generated here will also be searched when the user types in the autocomplete box. The item is accessed via the `item` property. **Basic Example** ```html <autocomplete-list   ng-model="ctrl.selectedPeople"   items="ctrl.allPeople"   item-text="item.firstName + ' ' + item.lastName"> </autocomplete-list> ``` |
 
-**Example**  
-```js
-<autocomplete-list
-  ng-model="ctrl.selectedPeople"
-  items="ctrl.allPeople"
-  item-text="item.firstName + ' ' + item.lastName">
-</autocomplete-list>
-```
